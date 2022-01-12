@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -14,10 +13,13 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Search, SearchIconWrapper, StyledInputBase } from './styled';
+import { useDispatch } from 'react-redux';
+import { toggleLeftSidebar } from 'redux/actions/sidebar';
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const dispatch = useDispatch();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -38,6 +40,8 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const toggleSidedrawer = () => {};
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -122,6 +126,7 @@ export default function PrimarySearchAppBar() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
+            onClick={() => dispatch(toggleLeftSidebar(true))}
             sx={{ mr: 2 }}
           >
             <MenuIcon />
@@ -138,24 +143,24 @@ export default function PrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {/* <IconButton
-              size='large'
-              aria-label='show 4 new mails'
-              color='inherit'
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
             >
-              <Badge badgeContent={4} color='error'>
+              <Badge badgeContent={4} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
             <IconButton
-              size='large'
-              aria-label='show 17 new notifications'
-              color='inherit'
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
             >
-              <Badge badgeContent={17} color='error'>
+              <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>*/}
+            </IconButton>
             <IconButton
               size="large"
               edge="end"

@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import * as React from 'react';
+import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import MuiLink from '@mui/material/Link';
 
-export const NextLinkComposed = React.forwardRef(function NextLinkComposed(
+export const NextLinkComposed = forwardRef(function NextLinkComposed(
   props,
-  ref,
+  ref
 ) {
   const {
     to,
@@ -40,7 +40,7 @@ export const NextLinkComposed = React.forwardRef(function NextLinkComposed(
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
-const Link = React.forwardRef(function Link(props, ref) {
+const Link = forwardRef(function Link(props, ref) {
   const {
     activeClassName = 'active',
     as: linkAs,

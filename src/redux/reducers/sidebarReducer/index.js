@@ -7,7 +7,7 @@ import {
   CLOSE_RIGHT_SIDEBAR,
 } from '../../actions/types';
 
-const defaultState = {
+const initialState = {
   leftIsVisible: false,
   rightIsVisible: false,
 };
@@ -15,7 +15,7 @@ const defaultState = {
 // The auth reducer. The starting state sets authentication
 // based on a token being in local storage. In a real app,
 // we would also want a util to check if the token is expired.
-const sidebarReducer = (state = defaultState, { type }) => {
+const sidebarReducer = (state = initialState, { type }) => {
   switch (type) {
     case TOGGLE_LEFT_SIDEBAR:
       return { ...state, leftIsVisible: !state.leftIsVisible };
