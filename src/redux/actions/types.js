@@ -35,3 +35,7 @@ export const SET_REG_ERRORS = 'SET_REG_ERRORS';
 export const CLEAR_ALL_ERRORS = 'CLEAR_ALL_ERRORS';
 export const CLEAR_LOGIN_ERRORS = 'CLEAR_LOGIN_ERRORS';
 export const CLEAR_REG_ERRORS = 'CLEAR_REG_ERRORS';
+
+// theme action types
+export const LIGHT_THEME = 'LIGHT_THEME';
+export const DARK_THEME = 'DARK_THEME';

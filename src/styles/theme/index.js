@@ -1,50 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
-
-// Create a theme instance.
-// const baseTheme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#556cd6',
-//     },
-//     secondary: {
-//       main: '#19857b',
-//     },
-//     error: {
-//       main: red.A400,
-//     },
-//   },
-// });
-
-// const darkTheme = createTheme({
-//   palette: {
-//     primary: {
-//       mode: 'dark',
-//       main: '#556cd6',
-//     },
-//     secondary: {
-//       main: '#19857b',
-//     },
-//     error: {
-//       main: red.A400,
-//     },
-//   },
-// });
-
-// const lightTheme = createTheme({
-//   palette: {
-//     primary: {
-//       mode: 'light',
-//       main: '#556cd6',
-//     },
-//     secondary: {
-//       main: '#19857b',
-//     },
-//     error: {
-//       main: red.A400,
-//     },
-//   },
-// });
 
 const theme = createTheme({
   typography: {
@@ -52,39 +6,27 @@ const theme = createTheme({
     fontSize: 14,
     fontFamilySecondary: "'Roboto Condensed', sans-serif",
   },
-});
-
-const darkTheme = createTheme({
-  ...theme,
   palette: {
-    type: 'dark',
     primary: {
-      main: '#26a27b',
+      // light: will be calculated from palette.primary.main,
+      main: '#E30613',
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      main: '#fafafa',
+      light: '#0066ff',
+      main: '#0044ff',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#ffcc00',
     },
+    // Used by `getContrastText()` to maximize the contrast between
+    // the background and the text.
+    contrastThreshold: 3,
+    // Used by the functions below to shift a color's luminance by approximately
+    // two indexes within its tonal palette.
+    // E.g., shift from Red 500 to Red 300 or Red 700.
+    tonalOffset: 0.2,
   },
 });
 
-const lightTheme = createTheme({
-  ...theme,
-  palette: {
-    type: 'light',
-    primary: {
-      main: '#fafafa',
-    },
-    secondary: {
-      main: '#26a27b',
-    },
-  },
-});
-
-const finalTheme = createTheme({
-  ...theme,
-  ...darkTheme,
-});
-
-export { darkTheme, lightTheme };
-
-export default finalTheme;
+export default theme;

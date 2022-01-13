@@ -1,12 +1,7 @@
 import React from 'react';
-import Layout from 'components/Layout';
 
 const Inventory = () => {
-  return (
-    <Layout>
-      <div>Inventory Page</div>
-    </Layout>
-  );
+  return <div>Inventory Page</div>;
 };
 
 export default Inventory;

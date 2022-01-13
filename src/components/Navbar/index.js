@@ -41,8 +41,6 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const toggleSidedrawer = () => {};
-
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -148,7 +146,7 @@ export default function PrimarySearchAppBar() {
               aria-label={`show ${4} new mails`}
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -157,7 +155,7 @@ export default function PrimarySearchAppBar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={7} color="error">
+              <Badge badgeContent={7} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

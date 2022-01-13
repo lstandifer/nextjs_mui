@@ -1,85 +1,75 @@
+import * as React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/icons-material/Menu';
-import { useSelector } from 'react-redux';
-import Link from 'components/Link';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import { useSelector, useDispatch } from 'react-redux';
 import { toggleLeftSidebar, toggleRightSidebar } from 'redux/actions/sidebar';
-import { useDispatch } from 'react-redux';
 
-const SideDrawer = ({ navLinks, direction }) => {
+export default function SideDrawer({ direction }) {
   const dispatch = useDispatch();
 
   const leftIsVisible = useSelector((state) => state.sidebar.leftIsVisible);
   const rightIsVisible = useSelector((state) => state.sidebar.rightIsVisible);
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = (direction) => (event) => {
     if (
       event.type === 'keydown' &&
       (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
-    if (direction === 'left') {
-      dispatch(toggleLeftSidebar(true));
-    } else {
-      dispatch(toggleRightSidebar(true));
-    }
+
+    direction === 'left'
+      ? dispatch(toggleLeftSidebar())
+      : dispatch(toggleRightSidebar());
   };
 
   const list = (anchor) => (
     <Box
-      sx={{ width: 250, marginTop: `auto`, marginBottom: `auto` }}
+      sx={{ width: 250 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {navLinks.map(({ title, path }, i) => (
-        <Typography
-          variannt="button"
-          key={`${title}${i}`}
-          sx={{
-            ml: 5,
-            my: 2,
-            textTransform: `uppercase`,
-          }}
-        >
-          <Link sx={{ color: 'common.white' }} href={path}>
-            {title}
-          </Link>
-        </Typography>
-      ))}
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
     </Box>
   );
 
   return (
-    <>
-      <IconButton
-        edge="start"
-        aria-label="menu"
-        onClick={toggleDrawer(direction, true)}
-        sx={{
-          color: `common.white`,
-          display: { xs: `inline`, md: `none` },
-        }}
-      >
-        <Menu fontSize="large" />
-      </IconButton>
+    <div>
       <Drawer
         anchor={direction}
-        open={direction === 'right' ? rightIsVisible : leftIsVisible}
+        open={direction === 'left' ? leftIsVisible : rightIsVisible}
         onClose={toggleDrawer(direction, false)}
-        sx={{
-          '.MuiDrawer-paper': {
-            bgcolor: 'primary.main',
-          },
-        }}
       >
         {list(direction)}
       </Drawer>
-    </>
+    </div>
   );
-};
-
-export default SideDrawer;
+}

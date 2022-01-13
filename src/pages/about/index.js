@@ -8,23 +8,21 @@ import Layout from 'components/Layout';
 
 export default function About() {
   return (
-    <Layout>
-      <Container maxWidth="sm" disableGutters>
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Next.js example
-          </Typography>
-          <Button
-            variant="contained"
-            component={Link}
-            noLinkStyle
-            href="/"
-            color="primary"
-          >
-            Go to the main page
-          </Button>
-        </Box>
-      </Container>
-    </Layout>
+    <Container maxWidth="sm" disableGutters>
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Next.js example
+        </Typography>
+        <Button
+          variant="contained"
+          component={Link}
+          noLinkStyle
+          href="/"
+          color="primary"
+        >
+          Go to the main page
+        </Button>
+      </Box>
+    </Container>
   );
 }

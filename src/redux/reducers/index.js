@@ -4,9 +4,11 @@ import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import sidebarReducer from './sidebarReducer';
 import errorReducer from './errorReducer';
+import themeReducer from './themeReducer';
 
 export default combineReducers({
   auth: authReducer,
   sidebar: sidebarReducer,
   errors: errorReducer,
+  theme: themeReducer,
 });
