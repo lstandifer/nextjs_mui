@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import capitalizeFirst from '../../helpers/capitalizeFirst';
+import capitalizeFirst from 'helpers/capitalizeFirst';
 
-import config from '../../../config.json';
+import config from 'config.json';
 
 const Header = () => {
   const title =

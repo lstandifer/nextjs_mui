@@ -130,7 +130,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
-          <Search>
+          <Search color={'secondary'}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
