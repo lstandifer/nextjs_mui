@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleLeftSidebar, toggleRightSidebar } from 'redux/actions/sidebar';
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -8,8 +11,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleLeftSidebar, toggleRightSidebar } from 'redux/actions/sidebar';
+import Link from 'components/Link';
+import { ListItemButton } from '@mui/material';
 
 export default function SideDrawer({ direction }) {
   const dispatch = useDispatch();
@@ -38,8 +41,13 @@ export default function SideDrawer({ direction }) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
+        {['Dashboard', 'About', 'Inventory', 'Users'].map((text, index) => (
+          <ListItem
+            button
+            component={Link}
+            href={`/` + text.toLowerCase().replace(/\s/g, '')}
+            key={text}
+          >
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
@@ -50,7 +58,7 @@ export default function SideDrawer({ direction }) {
       <Divider />
       <List>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button component={Link} href={`/dashboard`} key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>

@@ -1,11 +1,10 @@
 import React from 'react';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 
-const Card = ({ children }) => {
+const Card = (props) => {
   return (
-    <Paper elevation="3" sx={{ padding: 2 }}>
-      {children}
+    <Paper elevation={3} sx={{ height: '100%', padding: 2 }} {...props}>
+      {props.children}
     </Paper>
   );
 };

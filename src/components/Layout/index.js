@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
       <Header />
       <Navbar />
       <Sidedrawer direction={'left'} navLinks={navLinks} />
-      <div style={{ padding: 20 }}>{children}</div>
+      <div style={{ padding: 10, height: '100vh' }}>{children}</div>
       <Footer />
     </>
   );
