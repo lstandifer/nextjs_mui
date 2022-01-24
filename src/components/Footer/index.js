@@ -5,7 +5,7 @@ import config from 'config.json';
 
 import { StyledFooter } from './styled';
 
-const Copyright = () => {
+const Footer = () => {
   return (
     <StyledFooter>
       <Typography variant="body2" color="text.secondary" align="center">
@@ -19,4 +19,4 @@ const Copyright = () => {
   );
 };
 
-export default Copyright;
+export default Footer;

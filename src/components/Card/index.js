@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 
 const Card = (props) => {
   return (
-    <Paper elevation={3} sx={{ height: '100%', padding: 2 }} {...props}>
+    <Paper elevation={3} sx={{ height: '100%' }} {...props}>
       {props.children}
     </Paper>
   );

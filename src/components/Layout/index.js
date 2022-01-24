@@ -2,6 +2,7 @@ import Footer from '../Footer';
 import Header from '../Header';
 import Navbar from 'components/Navbar';
 import Sidedrawer from 'components/Sidedrawer';
+import { Container } from '@mui/material';
 
 export const navLinks = [
   { title: `home`, path: `/` },
@@ -17,7 +18,9 @@ const Layout = ({ children }) => {
       <Header />
       <Navbar />
       <Sidedrawer direction={'left'} navLinks={navLinks} />
-      <div style={{ padding: 10, height: '100vh' }}>{children}</div>
+      {/* <div style={{ padding: 10 }}>{children}</div> */}
+      <div>{children}</div>
+
       <Footer />
     </>
   );

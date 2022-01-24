@@ -5,10 +5,11 @@ import Card from 'components/Card';
 const Inventory = ({ children, isMobile }) => {
   return (
     <Box
-      gridColumn={'span 3'}
+      gridColumn={'span 1'}
       gridRow={'span 17'}
       height={{ md: '100%', xs: '900px' }}
       paddingTop={isMobile ? 1 : ''}
+      item
     >
       <Card>{children}</Card>
     </Box>

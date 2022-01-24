@@ -27,6 +27,27 @@ const theme = createTheme({
     // E.g., shift from Red 500 to Red 300 or Red 700.
     tonalOffset: 0.2,
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        '@global': {},
+      },
+      styleOverrides: `
+      *{
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100vh;
+        width: calc(100vw - (100vw - 100%));;
+      }
+      #__next {
+        height: 100vh;
+        width: 100%;
+      }
+     `,
+    },
+  },
 });
 
 export default theme;

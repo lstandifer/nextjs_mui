@@ -1,77 +1,55 @@
-import React, { useRef, useEffect } from 'react';
-import Chart from 'chart.js/auto';
+import React, { useRef, useLayoutEffect } from 'react';
+import * as am4core from '@amcharts/amcharts4/core';
+import * as am4charts from '@amcharts/amcharts4/charts';
+import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 
-const LineChart = (props, { chartData }) => {
-  const canvasEl = useRef(null);
+am4core.useTheme(am4themes_animated);
 
-  const colors = {
-    purple: {
-      default: 'rgba(149, 76, 233, 1)',
-      half: 'rgba(149, 76, 233, 0.5)',
-      quarter: 'rgba(149, 76, 233, 0.25)',
-      zero: 'rgba(149, 76, 233, 0)',
-    },
-    indigo: {
-      default: 'rgba(80, 102, 120, 1)',
-      quarter: 'rgba(80, 102, 120, 0.25)',
-    },
-  };
+const LineChart = ({ lineData, values, title }) => {
+  const chart = useRef(null);
 
-  useEffect(() => {
-    const ctx = canvasEl.current.getContext('2d');
-    // const ctx = document.getElementById("myChart");
+  useLayoutEffect(() => {
+    let lineChart = am4core.create(title, am4charts.XYChart);
 
-    const gradient = ctx.createLinearGradient(0, 16, 0, 600);
-    gradient.addColorStop(0, colors.purple.half);
-    gradient.addColorStop(0.65, colors.purple.quarter);
-    gradient.addColorStop(1, colors.purple.zero);
+    let chartLabel = title.replace(/_/g, ' ');
 
-    const weight = [60.0, 60.2, 59.1, 61.4, 59.9, 60.2, 59.8, 58.6, 59.6, 59.2];
+    lineChart.paddingRight = 40;
+    lineChart.paddingTop = 30;
+    lineChart.logo.disabled = true;
 
-    const labels = [
-      'Week 1',
-      'Week 2',
-      'Week 3',
-      'Week 4',
-      'Week 5',
-      'Week 6',
-      'Week 7',
-      'Week 8',
-      'Week 9',
-      'Week 10',
-    ];
-    const data = {
-      labels: labels,
-      datasets: [
-        {
-          backgroundColor: gradient,
-          label: 'Total Storage Capacity',
-          data: weight,
-          fill: true,
-          borderWidth: 2,
-          borderColor: colors.purple.default,
-          lineTension: 0.2,
-          pointBackgroundColor: colors.purple.default,
-          pointRadius: 3,
-        },
-      ],
+    lineChart.data = lineData;
+
+    let dateAxis = lineChart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.renderer.grid.template.location = 0;
+    dateAxis.title.text = chartLabel;
+
+    let valueAxis = lineChart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.tooltip.disabled = true;
+    valueAxis.renderer.minWidth = 35;
+
+    let series = lineChart.series.push(new am4charts.LineSeries());
+    series.dataFields.dateX = 'date';
+    series.dataFields.valueY = 'value';
+    series.tooltipText = '{valueY.value}';
+
+    lineChart.cursor = new am4charts.XYCursor();
+
+    let scrollbarX = new am4charts.XYChartScrollbar();
+    scrollbarX.minHeight = 10;
+    scrollbarX.series.push(series);
+
+    //scrollbarX.scrollbarChart.seriesContainer.hide();
+
+    lineChart.scrollbarX = scrollbarX;
+
+    chart.current = lineChart;
+
+    return () => {
+      lineChart.dispose();
     };
-    const config = {
-      type: 'line',
-      data: data,
-    };
-    const myLineChart = new Chart(ctx, config);
+  }, [lineData, values, title]);
 
-    return function cleanup() {
-      myLineChart.destroy();
-    };
-  });
-
-  return (
-    <div {...props}>
-      <canvas id="linechart" ref={canvasEl} width={'100%'} height={'100%'} />
-    </div>
-  );
+  return <div id={title} style={{ width: '100%', height: '100%' }} />;
 };
 
 export default LineChart;

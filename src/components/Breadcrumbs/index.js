@@ -3,7 +3,7 @@ import Card from 'components/Card';
 
 const Breadcrumbs = ({ children }) => {
   return (
-    <Box gridColumn={'span 9'} height={{ md: '100%' }}>
+    <Box gridColumn={'span 3'} gridRow={'span 1'} height={{ md: '100%' }}>
       <Card>{children}</Card>
     </Box>
   );
