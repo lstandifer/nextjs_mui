@@ -8,7 +8,7 @@ const Inventory = ({ children, isMobile }) => {
       gridColumn={'span 1'}
       gridRow={'span 17'}
       height={{ md: '100%', xs: '900px' }}
-      paddingTop={isMobile ? 1 : ''}
+      paddingTop={{ xs: 1, md: 0 }}
       item
     >
       <Card>{children}</Card>

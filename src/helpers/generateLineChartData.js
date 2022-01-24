@@ -1,11 +1,13 @@
 const generateLineChartData = () => {
-  var chartData = [];
-  var firstDate = new Date();
-  firstDate.setDate(firstDate.getDate() - 1000);
-  var visits = 1200;
+  let chartData = [];
+  let firstDate = new Date();
 
-  for (var i = 0; i < 500; i++) {
-    var newDate = new Date(firstDate);
+  firstDate.setDate(new Date().getDate() - 365);
+  let visits = 1300;
+
+  for (let i = 0; i < 365; i++) {
+    let newDate = new Date(firstDate);
+
     newDate.setDate(newDate.getDate() + i);
 
     visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 16);

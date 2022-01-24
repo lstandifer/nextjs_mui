@@ -5,8 +5,10 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 
 am4core.useTheme(am4themes_animated);
 
-const PieChart = ({ data, chartTitle, tooltipText }) => {
+const PieChart = ({ pieData, chartTitle, tooltipText }) => {
   // const chart = useRef(null);
+
+  console.log(pieData);
 
   useLayoutEffect(() => {
     // Create chart instance
@@ -24,9 +26,9 @@ const PieChart = ({ data, chartTitle, tooltipText }) => {
     title.paddingTop = 10;
 
     // add hover tooltip to chart title
-    // title.tooltipText = tooltipText;
+    title.tooltipText = tooltipText;
     // pieChart.tooltip.label.maxWidth = 55;
-    // pieChart.tooltip.label.wrap = true;
+    pieChart.tooltip.label.wrap = true;
 
     // Adds Legend to Chart
     pieChart.legend = new am4charts.Legend();
@@ -34,7 +36,7 @@ const PieChart = ({ data, chartTitle, tooltipText }) => {
     pieChart.logo.disabled = true;
 
     // Add data
-    pieChart.data = data;
+    pieChart.data = pieData;
 
     // Change PieChart fontsize
     pieChart.fontSize = 9;
@@ -43,18 +45,21 @@ const PieChart = ({ data, chartTitle, tooltipText }) => {
     var pieSeries = pieChart.series.push(new am4charts.PieSeries());
     pieSeries.dataFields.value = 'RawCapacity';
     pieSeries.dataFields.category = 'Asset';
+    pieSeries.slices.template.propertyFields.fill = 'color';
 
     // Changes width of pie chart pointers and allows wrapping of text when max width is hit
     pieSeries.labels.template.maxWidth = 54;
     pieSeries.labels.template.wrap = true;
 
     // setting to allow only label to be shown
-    // pieSeries.labels.template.text = '{category}';
+    pieSeries.labels.template.text = '{value}';
+    pieSeries.labels.template.fontSize = 12;
+    pieSeries.labels.template.textAlign = 'bottom';
 
     return () => {
       pieChart.dispose();
     };
-  }, [data, chartTitle, tooltipText]);
+  }, [pieData, chartTitle, tooltipText]);
 
   return (
     <div

@@ -31,6 +31,8 @@ const LineChart = ({ lineData, values, title }) => {
     series.dataFields.dateX = 'date';
     series.dataFields.valueY = 'value';
     series.tooltipText = '{valueY.value}';
+    series.stroke = am4core.color('#ff0000'); // red
+    series.strokeWidth = 3;
 
     lineChart.cursor = new am4charts.XYCursor();
 
