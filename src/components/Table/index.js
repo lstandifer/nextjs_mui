@@ -12,9 +12,12 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
@@ -43,6 +46,11 @@ const rows = [
   createData('Marshmallow', 318, 0, 81, 2.0),
   createData('Nougat', 360, 19.0, 9, 37.0),
   createData('Oreo', 437, 18.0, 63, 4.0),
+  createData('Snickers', 518, 26.0, 65, 7.0),
+  createData('KrispyKreme', 392, 0.2, 98, 0.0),
+  createData('MarshmallowPie', 318, 0, 81, 2.0),
+  createData('CoffeeCake', 360, 19.0, 9, 37.0),
+  createData('Twix', 437, 18.0, 63, 4.0),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -291,12 +299,19 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: '100%', height: '100%' }}>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       {/* <Paper sx={{ width: '100%', mb: 0 }}> */}
       <EnhancedTableToolbar numSelected={selected.length} />
-      <TableContainer>
+      <TableContainer sx={{ height: '92%' }}>
         <Table
-          sx={{ minWidth: 750 }}
+          // sx={{ minWidth: 750 }}
           aria-labelledby="tableTitle"
           size={dense ? 'small' : 'medium'}
         >

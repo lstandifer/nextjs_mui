@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/system';
-import TopCard from 'components/TopCard';
-import Inventory from 'components/Inventory';
+import TopCard from 'components/Card/TopCard';
+import Inventory from 'components/Card/Inventory';
 import Breadcrumbs from 'components/Breadcrumbs';
-import StatCard from 'components/StatCard';
+import StatCard from 'components/Card/StatCard';
 import dynamic from 'next/dynamic';
 import generateLineChartData from 'helpers/generateLineChartData';
 import Table from 'components/Table';
@@ -20,9 +20,20 @@ const Dashboard = ({
   usedCapLineData,
   totalCapLineData,
   freeCapLineData,
-  pieChartData,
 }) => {
   const theme = useTheme();
+
+  function getRandomSymNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return [
+      {
+        Asset: 'Symmetrix',
+        RawCapacity: Math.floor(Math.random() * (max - min + 1) + min),
+        color: theme.palette.primary.light,
+      },
+    ];
+  }
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -42,35 +53,40 @@ const Dashboard = ({
       gridTemplateRows={'repeat(22, 1fr)'}
       gap={1}
       height={{ xs: '100%', md: '100vh' }}
+      minWidth={'1fr'}
       padding={1}
     >
       {isMobile ? <Breadcrumbs isMobile>BreadCrumbs</Breadcrumbs> : null}
       <TopCard isMobile>
         <PieChart
           chartTitle={'Symmetrix Raw Capacity'}
-          pieData={pieChartData}
+          pieData={getRandomSymNumber(80000, 11150)}
           tooltipText={rawCapToolTip}
+          theme={theme}
         />
       </TopCard>
       <TopCard isMobile>
         <PieChart
           chartTitle={'Symmetrix Total Capacity'}
-          pieData={pieChartData}
+          pieData={getRandomSymNumber(80000, 11150)}
           tooltipText={totalCapToolTip}
+          theme={theme}
         />
       </TopCard>
       <TopCard isMobile>
         <PieChart
           chartTitle={'Symmterix Used Capacity'}
-          pieData={pieChartData}
+          pieData={getRandomSymNumber(80000, 11150)}
           tooltipText={usedCapToolTip}
+          theme={theme}
         />
       </TopCard>
       <TopCard isMobile>
         <PieChart
           chartTitle={'Symmterix Free Capacity'}
-          pieData={pieChartData}
+          pieData={getRandomSymNumber(80000, 11150)}
           tooltipText={freeCapToolTip}
+          theme={theme}
         />
       </TopCard>
       <Inventory isMobile>
@@ -94,17 +110,8 @@ const Dashboard = ({
 };
 
 export async function getServerSideProps() {
-  let pieChartData = [
-    {
-      Asset: 'Symmetrix',
-      RawCapacity: 9512.6,
-      color: '#e83742',
-    },
-  ];
-
   return {
     props: {
-      pieChartData: JSON.parse(JSON.stringify(pieChartData)),
       rawCapLineData: JSON.parse(JSON.stringify(generateLineChartData())),
       usedCapLineData: JSON.parse(JSON.stringify(generateLineChartData())),
       totalCapLineData: JSON.parse(JSON.stringify(generateLineChartData())),

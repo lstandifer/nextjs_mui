@@ -3,6 +3,8 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 
+import theme from 'styles/theme';
+
 am4core.useTheme(am4themes_animated);
 
 const LineChart = ({ lineData, values, title }) => {
@@ -10,6 +12,13 @@ const LineChart = ({ lineData, values, title }) => {
 
   useLayoutEffect(() => {
     let lineChart = am4core.create(title, am4charts.XYChart);
+    lineChart.zoomOutButton.background.fill = am4core.color(
+      theme.palette.primary.main
+    );
+    lineChart.zoomOutButton.background.states.getKey('hover').properties.fill =
+      am4core.color(theme.palette.primary.light);
+    lineChart.zoomOutButton.background.states.getKey('down').properties.fill =
+      am4core.color(theme.palette.secondary.dark);
 
     let chartLabel = title.replace(/_/g, ' ');
 
@@ -22,6 +31,9 @@ const LineChart = ({ lineData, values, title }) => {
     let dateAxis = lineChart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.grid.template.location = 0;
     dateAxis.title.text = chartLabel;
+    dateAxis.tooltip.background.fill = am4core.color(
+      theme.palette.primary.main
+    );
 
     let valueAxis = lineChart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.tooltip.disabled = true;
@@ -31,8 +43,9 @@ const LineChart = ({ lineData, values, title }) => {
     series.dataFields.dateX = 'date';
     series.dataFields.valueY = 'value';
     series.tooltipText = '{valueY.value}';
-    series.stroke = am4core.color('#ff0000'); // red
-    series.strokeWidth = 3;
+    series.fill = am4core.color(theme.palette.primary.dark);
+    series.stroke = am4core.color(theme.palette.primary.main);
+    series.strokeWidth = 1;
 
     lineChart.cursor = new am4charts.XYCursor();
 

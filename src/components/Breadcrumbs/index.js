@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import Card from 'components/Card';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
+import Link from 'components/Link';
 
 function handleClick(event) {
   event.preventDefault();
@@ -11,8 +11,7 @@ function handleClick(event) {
 const Breadcrumb = () => {
   return (
     <Box gridColumn={'span 3'} gridRow={'span 1'} height={{ md: '100%' }}>
-      <Card>
-        {' '}
+      <Card sx={{ padding: '30px' }}>
         <div role="presentation" onClick={handleClick}>
           <Breadcrumbs aria-label="breadcrumb">
             <Link underline="hover" color="inherit" href="/">
@@ -27,7 +26,7 @@ const Breadcrumb = () => {
             </Link>
             <Link
               underline="hover"
-              color="text.primary"
+              color="primary.main"
               href="/components/breadcrumbs/"
               aria-current="page"
             >
